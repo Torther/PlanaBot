@@ -1,0 +1,8 @@
+# 申请机器人时获取到的机器人 BotAppID
+appID: 'APPID'
+# 申请机器人时获取到的机器人 BotToken
+token: 'TOKEN'
+# 事件订阅,用于开启可接收的消息类型
+intents: ['PUBLIC_GUILD_MESSAGES']
+# 沙箱支持，可选，默认false. v2.7.0+
+sandbox: true
