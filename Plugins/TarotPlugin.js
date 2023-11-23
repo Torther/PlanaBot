@@ -15,7 +15,7 @@ class TarotPlugin extends PluginBase {
                 await this.drawAndSaveTarot(data);
             }
         } catch (error) {
-            console.error(`[${this.name}] Error executing command: ${error.message}`);
+            console.error(`[ERROR][${this.name}] Error executing command: ${error.message}`);
         }
     }
 

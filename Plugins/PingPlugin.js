@@ -10,8 +10,12 @@ class PingPlugin extends PluginBase {
     }
 
     async executeCommand(data, command) {
-        if (command[0] === '/ping') {
-            await this.sendReferenceMessage(data, 'pong!', false);
+        try {
+            if (command[0] === '/ping') {
+                await this.sendReferenceMessage(data, 'pong!', false);
+            }
+        } catch (error) {
+            console.error(`[ERROR][${this.name}] Error executing command: ${error.message}`);
         }
     }
 }
