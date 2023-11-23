@@ -4,9 +4,9 @@ const {default: axios} = require("axios");
 
 class GuidePlugin extends PluginBase {
     constructor() {
-        super('GuidePlugin', '提供有关攻略的信息');
+        super('GuidePlugin', '提供各种攻略');
         this.commands = [
-            {command: '/攻略', description: '查询相关攻略信息'}
+            {command: '/攻略', description: '提供各种攻略'}
         ];
     }
 
@@ -38,7 +38,7 @@ class GuidePlugin extends PluginBase {
                 console.error(err)
             })
         } else {
-            await this.sendReferenceMessage(data, "数据源暂时无法使用", false);
+            await this.sendReferenceMessage(data, "数据源异常，暂时无法使用", false);
         }
     }
 }
