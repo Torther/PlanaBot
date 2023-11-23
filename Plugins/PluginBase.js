@@ -6,6 +6,14 @@ class PluginBase {
         this.commands = [];
     }
 
+    hasCommand(command){
+        return this.commands.some(cmd => cmd.command === command);
+    }
+
+    getFormattedCommands() {
+        return this.commands.map(cmd => ` - ${cmd.command}\t${cmd.description}\n`).join('');
+    }
+
     async initialize(client) {
         if (!client) {
             console.error(`[${this.name}] Invalid client instance provided to the plugin.`);

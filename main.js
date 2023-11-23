@@ -20,7 +20,7 @@ async function main() {
             if (data.eventType === 'AT_MESSAGE_CREATE') {
                 console.log(`[MESSAGE] Receive from ${data.msg.author.username}(${data.msg.author.id}) : ${data.msg.content}`)
                 const command = data.msg.content.replace(/<@!.*?>\s*/, "").split(" ");
-                pluginManager.executeCommand(data, command);
+                pluginManager.executeCommand(data, command, client);
             }
         });
     } catch (error) {

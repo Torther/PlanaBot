@@ -35,11 +35,36 @@ class PluginManager {
         }
     }
 
-    async executeCommand(data, command) {
+    async executeCommand({msg: {channel_id, id, author}}, command, client) {
+        let commandHandled = false;
         for (const plugin of this.plugins) {
-            await plugin.executeCommand(data, command);
+            if (plugin.hasCommand(command[0])) {
+                await plugin.executeCommand({msg: {channel_id, id, author}}, command);
+                commandHandled = true;
+                break;
+            }
+        }
+        if (!commandHandled) {
+            await this.handleDefaultCommand({msg: {channel_id, id, author}}, command, client);
         }
     }
+
+    async handleDefaultCommand({msg: {channel_id, id, author}}, command, client) {
+        const availableCommands = this.collectAvailableCommands();
+        const errorMessage = `未匹配到命令：${command}\n当前可用命令列表：\n${availableCommands}`;
+
+        let reply = await client.messageApi.postMessage(channel_id, {
+            content: errorMessage,
+            msg_id: id,
+            message_reference: {message_id: id}
+        });
+        console.log(`[MESSAGE] Reply to ${author.username}(${author.id}) : ${reply.data.content}`);
+    }
+
+    collectAvailableCommands() {
+        return this.plugins.map(plugin => plugin.getFormattedCommands()).join('');
+    }
+
 }
 
 module.exports = PluginManager;
