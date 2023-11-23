@@ -27,7 +27,6 @@ class PluginBase {
                 message_id: data.msg.id
             }
         });
-        console.log(reply.data)
         await console.log(`[MESSAGE] Reply to ${data.msg.author.username}(${data.msg.author.id}) : ${reply.data.content.length>0?reply.data.content:"[Image]"}`)
     }
 }
