@@ -50,10 +50,14 @@ class TarotPlugin extends PluginBase {
     }
 
     drawTarot() {
+        const badResult = [14, 16, 17]
         const tarotCount = 22;
         const tarotIndex = Math.floor(Math.random() * tarotCount) + 1;
         const positive = Math.round(Math.random());
-        return {tarotIndex, positive};
+        if ((badResult.map(i => i === tarotIndex) && positive === 1) || positive === 0){
+            return this.drawTarot()
+        }
+            return {tarotIndex, positive};
     }
 
 
